@@ -1,23 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+
+import Nav from './components/Nav';
+import MainWrapper from './components/MainWrapper';
+import ToDoWrapper from './components/ToDoWrapper';
+import ToDoList from './components/ToDoList';
+import ToDoForm from './components/ToDoForm';
 
 function App() {
+
+  const listWithToDos = [];
+  const [toDoList, setToDoList] = useState(listWithToDos);
+
+  const addToDo = (title, input) => {
+    let copy = toDoList;
+    copy = [...copy, { id: toDoList.length + 1, toDoTitle: title, content: input }];
+    setToDoList(copy);
+  };
+
+  function handleDeleteClick(id) {
+    let removeItem = toDoList.filter((todo) => {
+      return todo.id !== id;
+    });
+    setToDoList(removeItem);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <MainWrapper>
+        <ToDoForm addToDo={addToDo} />
+        <ToDoWrapper>
+          <ToDoList toDoList={toDoList} onDeleteClick={handleDeleteClick} />
+        </ToDoWrapper>
+      </MainWrapper>
     </div>
   );
 }
