@@ -15,7 +15,6 @@ function Navbar() {
                 <li>
                     <NavLink to="/actors">Skuespillere</NavLink>
                 </li>
-                <h1>NAVBAR</h1>
             </ul>
         </nav>
     </header>

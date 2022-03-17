@@ -7,9 +7,20 @@ const actor = {
       title: "actor",
       name: "actor",
       type: "string",
-      descripåtion: "Dette er actor.",
+      description: "Dette er actor.",
+    },
+    {
+      title: "Slug",
+      name: "slug",
+      type: "slug",
+      description: "Dette er den unike url-en",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "actor",
+        maxLength: 96,
+      },
     },
   ],
 };
 
-export default actor
+export default actor;
